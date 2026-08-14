@@ -1,0 +1,35 @@
+{# {% extends 'base.html.twig' %} #}
+
+{% import 'core/default_templates/form_search.html.twig' as form_search %}
+{% import 'core/default_templates/data_table_macro.html.twig' as data_table %}
+
+{# {% block body %} #}
+
+    {# {{ form_search.form_search(form, ["delivery", "product"]) }} #}
+
+    {{ data_table.table(rows, {
+        "newLink": data_table.new_btn('delivery_item_create', {"deliveryId": app.request.get('deliveryId')}),
+        "cols" : {
+            "tableAction": {
+                "label": "core.module.actionTitle",
+                "edit": path('delivery_item_edit', {"id": -1, "deliveryId": app.request.get('deliveryId')}),
+            },
+            "delivery.deliveryDate": {
+                "label": "delivery_item.deliveryDate",
+                "type": "date",
+            },
+            "product.name": {
+                "label": "delivery_item.product",
+            },
+            "quantity": {
+                "label": "delivery_item.quantity",
+                "type": "number",
+            },
+            "pricePerItem": {
+                "label": "delivery_item.pricePerItem",
+                "type": "money",
+            },
+        }
+     }) }}
+
+{# {% endblock %}  #}
